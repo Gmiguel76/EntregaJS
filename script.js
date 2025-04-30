@@ -1,10 +1,6 @@
-let pacientes = [{nombre:"Juan Ignacio Perez", edad:"9 años", sintoma:"fiebre"}, {nombre:"Clara Martinez", edad:"4 años", sintoma:"Tos"}, {nombre:"Pedro Gonzalez", edad:"12 años", sintoma:"Traumatismo codo"},  {nombre:"Maria Mandeo", edad:"6 años", sinntoma:"Traumatismo craneo",}];
-
-console.log("Pacientes ingresados");
-
-for (const item of pacientes) {
-  console.log(`- ${item.nombre} (${item.edad}) (${item.sintoma})`);
-}
+let pacientes = [];
+let nuevoIngreso = "si";
+  
 
 
 function agregarNombreApellido () {
@@ -15,8 +11,6 @@ return nombre;
 
 }
 
-agregarNombreApellido();
-
 
 function agregarEdad() {
 
@@ -26,25 +20,54 @@ return edad;
 
 }
 
-agregarEdad();
-
 
 function agregarSintoma() {
 
 let sintoma = prompt ("Ingrese sintoma del paciente");
 
-
-if (sintoma === "dificultad respiratoria grave" || sintoma ==="convulsiones" || sintoma === "traumatismo grave"){
-
-alert ("Codigo Rojo: Atencion inmediata");}
-
-else if (sintoma=== "broncoespasmo" || sintoma === "fiebre alta"){
-
-alert ("Codigo Amarillo: Atencion prioritaria");}
-
-else {alert ("Codigo Verde: Atencion normal");}
+return sintoma;
 
 }
 
-agregarSintoma();
 
+function agregarPrioridad(sintoma){
+  
+if (sintoma === "dificultad respiratoria grave" || sintoma ==="convulsiones" || sintoma === "traumatismo grave"){
+
+alert ("🔴Codigo Rojo: Atencion inmediata");
+return "Codigo rojo";}
+
+else if (sintoma=== "broncoespasmo" || sintoma === "fiebre alta"){
+
+alert ("🟡Codigo Amarillo: Atencion prioritaria");
+return "Codigo amarillo";}
+
+else {alert ("🟢Codigo Verde: Atencion normal");
+return "Codigo verde";
+}
+
+}
+
+
+
+do {
+  let nombre = agregarNombreApellido();
+  let edad = agregarEdad();
+  let sintoma = agregarSintoma();
+  let prioridad = agregarPrioridad(sintoma);
+
+
+  let nuevoPacienteIngresado = {nombre: nombre, edad: edad, sintoma: sintoma, prioridad: prioridad};
+
+  pacientes.push(nuevoPacienteIngresado);
+
+  console.log("Pacientes ingresados:");
+
+  for (const item of pacientes) {
+  console.log(`- ${item.nombre} (${item.edad} años) (${item.sintoma}) (${item.prioridad})`);}
+
+  
+  nuevoIngreso = prompt ("¿Agregar nuevo ingreso? (si/no)");
+  
+  
+  } while (nuevoIngreso === "si");
